@@ -1,7 +1,7 @@
 return {
   -- theme
   {
-    'timmyha/oh-lucy.nvim',
+    'timmyha/oh-no',
     config = function()
       vim.cmd 'colorscheme oh-lucy-evening'
     end,
@@ -12,6 +12,7 @@ return {
   -- autopairs
   'cohama/lexima.vim',
 
+  'felipesere/vim-open-readme',
   -- autotag
   {
     'windwp/nvim-ts-autotag',
