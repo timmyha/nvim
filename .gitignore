@@ -1,7 +1,0 @@
-.gitignore
-tags
-test.sh
-.luarc.json
-nvim
-lazy-lock.json
-pack/github/start/
