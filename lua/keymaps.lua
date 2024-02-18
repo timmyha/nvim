@@ -58,3 +58,23 @@ keymap('v', '<leader>zn', ":'<,'>TZNarrow<CR>", {})
 keymap('n', '<leader>za', ':TZAtaraxis<CR>', {})
 
 keymap('n', 'gd', ":lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+keymap('n', 'gt', "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { noremap = true })
+keymap('n', 'gp', "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { noremap = true })
+keymap('n', '<Esc>', "<cmd>lua require('goto-preview').close_all_win()<CR>", { noremap = true })
+
+-- center page after next search
+keymap('n', 'n', 'nzzzv', { noremap = true })
+keymap('n', 'N', 'Nzzzv', { noremap = true })
+
+-- append/prepend to visual selection
+keymap('v', 'ma', ":%norm I\"jkxA\"jkxA,<CR>", {})
+
+-- ctrl+a to select all
+keymap('n', '<C-a>', 'ggVG', { noremap = true })
+keymap('i', '<C-[>', '<cmd>stopinsert<CR>', { noremap = true })
+
+-- format
+keymap('n', '<leader>fm', '<cmd>FormatEnable<CR><cmd>w<cr><cmd>FormatDisable<CR>')
+
+-- gpt
+keymap('n', '<leader>gpt', '<cmd>GpChatNew popup<cr>', { noremap = true })

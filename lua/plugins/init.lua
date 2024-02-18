@@ -1,15 +1,19 @@
 return {
   -- screenplay formatting
   {
-    'vim-scripts/fountain.vim',
-  },
+    'robitx/gp.nvim',
+    config = function()
+      require('gp').setup()
 
-  -- hides colorcolumn unless necessary
+      -- or setup with your own config (see Install > Configuration in Readme)
+      -- require("gp").setup(config)
+
+      -- shortcuts might be setup here (see Usage > Shortcuts in Readme)
+    end,
+  },
   {
-    'm4xshen/smartcolumn.nvim',
-    opts = {},
+    'jlcrochet/vim-crystal',
   },
-
   -- zen mode, <leader>za/n
   {
     'pocco81/truezen.nvim',
@@ -27,15 +31,30 @@ return {
     end,
   },
 
-  -- code actions lightbulb
+  -- markdown preview
   {
-    'kosayoda/nvim-lightbulb',
-    config = function()
-      require('nvim-lightbulb').setup {
-        autocmd = { enabled = true },
-      }
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
     end,
+    ft = { 'markdown' },
   },
+  -- paste images
+  {
+    'HakonHarnes/img-clip.nvim',
+    cmd = 'PasteImage',
+    opts = {
+      -- add options here
+      -- or leave it empty to use the default settings
+    },
+    keys = {
+      -- suggested keymap
+      { '<leader>p', '<cmd>PasteImage<cr>', desc = 'Paste clipboard image' },
+    },
+  },
+
   -- autotag
   {
     'windwp/nvim-ts-autotag',
@@ -62,12 +81,64 @@ return {
 
   -- ysiw[character] yank surround inner word with character
   {
-
     'tpope/vim-surround',
   },
 
   -- i don't write my own code
   {
-    'github/copilot.vim',
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = function()
+      require('copilot').setup {
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = '<Tab>',
+            accept_word = false,
+            accept_line = false,
+            next = '<C-,>',
+            prev = '<C-.>',
+            dismiss = '<C-]>',
+          },
+        },
+      }
+    end,
+  },
+  {
+    'MeanderingProgrammer/dashboard.nvim',
+    event = 'VimEnter',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('dashboard').setup {
+        -- Dashboard header
+        header = {
+          'present day, present time!',
+        },
+        -- Format to display date in
+        date_format = 'DD/MM/YYYY',
+        -- List of directory paths
+        directories = {
+          '~/.config',
+          '~/.config/nvim',
+          '~/Documents/notes',
+          '~/Documents/whiplash',
+          '~/Documents/dev',
+          '~/Documents/dev/scratch',
+        },
+        footer = {},
+        -- Highlight groups to use for various components
+        highlight_groups = {
+          header = 'Constant',
+          icon = 'Type',
+          directory = 'Delimiter',
+          hotkey = 'Statement',
+        },
+      }
+    end,
   },
 }

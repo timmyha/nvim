@@ -1,9 +1,14 @@
 return {
   {
-    'Yazeed1s/oh-lucy.nvim',
-    priority = 1000,
+    'timmyha/oh-lucy.nvim',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      vim.cmd 'colorscheme oh-lucy'
+      --local dracula = require 'dracula'
+
+      --dracula.setup()
+
+      vim.cmd.colorscheme 'oh-lucy'
     end,
   },
 }

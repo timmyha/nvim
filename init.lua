@@ -1,19 +1,13 @@
 vim.g.mapleader = ';'
-			vim.g.maplocalleader = ';'
-
-require 'options'
-require 'keymaps'
+vim.g.maplocalleader = ';'
 
 -- neovide gui settings
 if vim.g.neovide then
+  vim.g.neovide_cursor_vfx_mode = ''
   vim.g.neovide_cursor_antialiasing = false
-  vim.o.guifont = 'BlexMono Nerd Font:h13'
-  local alpha = function()
-    return string.format('%x', math.floor((255 * vim.g.transparency) or 0.99))
-  end
-  vim.g.neovide_transparency = 0.0
-  vim.g.transparency = 0.99
-  vim.g.neovide_background_color = '#1c1818' .. alpha()
+  vim.o.guifont = 'DMMono Nerd Font:h14'
+  vim.g.neovide_background_color = '#21272e'
+  vim.g.neovide_scroll_animation_length = 0.2
 end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -28,6 +22,9 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
+
+require 'options'
+require 'keymaps'
 
 require('lazy').setup({
   performance = {
@@ -375,6 +372,7 @@ mason_lspconfig.setup_handlers {
 local cmp = require 'cmp'
 
 local luasnip = require 'luasnip'
+
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
@@ -425,7 +423,7 @@ cmp.setup {
 -- doesn't seem to work unless placed in init.lua
 vim.cmd [[
     highlight nCursor guifg=#752f4d guibg=#ba7cbb
-    highlight iCursor guifg=#1b1818 guibg=#97bad0
+    highlight iCursor guifg=#1b1818 guibg=#c84639
     highlight vCursor guifg=#1b1818 guibg=#FFFFFF
     highlight rCursor guifg=#1b1818 guibg=#FFFFFF
     highlight Cursor guifg=#1b1818 guibg=#FFFFFF
@@ -440,4 +438,6 @@ vim.cmd [[
     set guicursor+=i:blinkwait0
     set noswapfile
     set noshowmode
+	 	FormatDisable
+
   ]]
