@@ -2,31 +2,31 @@ local keymap = vim.keymap.set
 
 -- turn off highlighting with comma
 keymap('n', ',', function()
-  return ':noh<CR>'
+	return ':noh<CR>'
 end, { expr = true, desc = 'turn off highlight' })
 
 -- toggle LSP
 keymap('n', '<leader>ll', function()
-  return ':LspStop<CR>'
+	return ':LspStop<CR>'
 end, { expr = true, desc = 'Stop LSP' })
 
 keymap('n', '<leader>ls', function()
-  return ':LspStart<CR>'
+	return ':LspStart<CR>'
 end, { expr = true, desc = 'Start LSP' })
 
 -- file browser
 keymap('n', '<leader>fb', function()
-  return ':Telescope file_browser<CR>'
+	return ':Telescope file_browser<CR>'
 end, { expr = true, desc = '[F]ile [B]rowser' })
 
 -- telescope undo
 keymap('n', '<leader>fu', function()
-  return ':Telescope undo<CR>'
+	return ':Telescope undo<CR>'
 end, { expr = true, desc = '[U]ndo' })
 
 -- project browser
 keymap('n', '<leader>pp', function()
-  return ':Telescope project<CR>'
+	return ':Telescope project<CR>'
 end, { expr = true, desc = '[P]roject browser' })
 
 -- i think this stops spacebar from traversing text
@@ -78,3 +78,12 @@ keymap('n', '<leader>fm', '<cmd>FormatEnable<CR><cmd>w<cr><cmd>FormatDisable<CR>
 
 -- gpt
 keymap('n', '<leader>gpt', '<cmd>GpChatNew popup<cr>', { noremap = true })
+
+keymap("n", "<leader>ca", function()
+	require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })
+
+keymap("n", "\\", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+keymap('n', '<Leader>tt', '<CMD>lua require("FTerm").toggle()<CR>')
+keymap('t', '<Esc>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
